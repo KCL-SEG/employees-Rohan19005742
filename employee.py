@@ -1,5 +1,5 @@
-"""Employee pay calculator."""
-"""ENTER YOUR SOLUTION HERE!"""
+#"""Employee pay calculator."""
+#"""ENTER YOUR SOLUTION HERE!"""
 
 class Employee:
     def __init__(self, name, contractType, hours, pay, commissionType, bonous, numberOfContractsLanded):
@@ -11,12 +11,21 @@ class Employee:
         self.bonous = bonous
         self.numberOfContarctsLanded = numberOfContractsLanded
 
-    def get_pay(self):
+    def set_pay(self):
         if (self.contractType == "hourly"):
             self.pay *= self.hours
+        else:
+          self.pay += 0
         if (self.commissionType == "variable"):
             self.bonous *= self.numberOfContarctsLanded
-        return self.pay + self.bonous
+        else:
+          self.bonous +=0
+        print(self.pay)
+        print(self.bonous)
+        self.pay = self.pay + self.bonous
+
+    def get_pay(self):
+      return self.pay
     def __str__(self):
         answer = self.name
         if(self.contractType == "monthly"):
@@ -27,6 +36,7 @@ class Employee:
             answer += " and receives a commission for " + str(self.numberOfContarctsLanded) + " contract(s) at " + str(self.bonous) + "/contract"
         elif(self.commissionType == "fixed"):
             answer += " and recieves a bonous commission of " + str(self.bonous)
+        self.set_pay()
         answer += ". Thier total pay is " + str(self.get_pay()) + "."
         return answer
         
