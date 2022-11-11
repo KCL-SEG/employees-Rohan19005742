@@ -1,6 +1,8 @@
 #"""Employee pay calculator."""
 #"""ENTER YOUR SOLUTION HERE!"""
 
+import re
+
 class Employee:
     def __init__(self, name, contractType, hours, pay, commissionType, bonous, numberOfContractsLanded):
         self.name = name
@@ -14,18 +16,14 @@ class Employee:
     def set_pay(self):
         if (self.contractType == "hourly"):
             self.pay *= self.hours
-        else:
-          self.pay += 0
         if (self.commissionType == "variable"):
             self.bonous *= self.numberOfContarctsLanded
         else:
           self.bonous +=0
-        print(self.pay)
-        print(self.bonous)
-        self.pay = self.pay + self.bonous
+        self.pay = str(int(self.pay) + int(self.bonous))
 
     def get_pay(self):
-      return self.pay
+      return int(self.pay)
     def __str__(self):
         answer = self.name
         if(self.contractType == "monthly"):
