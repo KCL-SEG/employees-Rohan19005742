@@ -9,36 +9,47 @@ class Employee:
         self.contractType = contractType
         self.hours = hours
         self.pay = pay
+        self.totalPay = pay
         self.commissionType = commissionType
         self.bonous = bonous
+        self.totalBonous = bonous
         self.numberOfContarctsLanded = numberOfContractsLanded
+        self.set_pay()
 
     def set_pay(self):
         if (self.contractType == "hourly"):
-            self.pay *= self.hours
+            self.totalPay *= int(self.hours)
         if (self.commissionType == "variable"):
-            self.bonous *= self.numberOfContarctsLanded
+            self.totalBonous *= int(self.numberOfContarctsLanded)
         else:
           self.bonous +=0
-        self.pay = str(int(self.pay) + int(self.bonous))
+        #self.pay = str(int(self.pay) + int(self.bonous))
 
     def get_pay(self):
-      return int(self.pay)
+        pay = 0
+        if (self.contractType == "hourly"):
+            pay += int(self.totalPay)
+        else:
+            pay += int(self.pay)
+        if (self.commissionType == "variable"):
+            pay += int(self.totalBonous)
+        else:
+            pay += int(self.bonous)
+        return int(pay)
     def __str__(self):
         answer = self.name
         if(self.contractType == "monthly"):
             answer += " works on a monthly salary of " + str(self.pay)
         elif (self.contractType == "hourly"):
-            answer += " works on a contract of " + str(self.hours) + " hours at " + str(self.pay/self.hours) +"/hour"
+            answer += " works on a contract of " + str(self.hours) + " hours at " + str(int(self.totalPay/self.hours)) +"/hour"
         if(self.commissionType == "variable"):
             answer += " and receives a commission for " + str(self.numberOfContarctsLanded) + " contract(s) at " + str(self.bonous) + "/contract"
         elif(self.commissionType == "fixed"):
-            answer += " and recieves a bonous commission of " + str(self.bonous)
-        self.set_pay()
-        answer += ". Thier total pay is " + str(self.get_pay()) + "."
+            answer += " and receives a bonus commission of " + str(self.bonous)
+        answer += ".  Their total pay is " + str(self.get_pay()) + "."
         return answer
         
-
+import re
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
 billie = Employee('Billie','monthly','-1','4000',"none",0,0)
 
